@@ -69,40 +69,7 @@ export default function WhyUs() {
   const cardsContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    const matchMedia = window.matchMedia('(min-width: 1024px)')
-    if (!matchMedia.matches) return
-
-    const section = sectionRef.current
-    const container = cardsContainerRef.current
-    if (!section || !container) return
-
-    const ctx = gsap.context(() => {
-      const cards = Array.from(container.children) as HTMLElement[]
-
-      cards.forEach((card, idx) => {
-        gsap.fromTo(
-          card,
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.4,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 90%',
-              toggleActions: 'play none none none',
-              once: true,
-            },
-            delay: idx * 0.05,
-          }
-        )
-      })
-    }, section)
-
-    return () => ctx.revert()
+    // Standard rendering without hiding cards initially via GSAP opacity: 0
   }, [])
 
   return (

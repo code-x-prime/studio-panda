@@ -1,22 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
     const homeOnly = searchParams.get('home') === 'true'
 
     const where = homeOnly
-      ? { isActive: true, showOnHome: true }
-      : { isActive: true }
+      ? { showOnHome: true }
+      : {}
 
     const notices = await prisma.notice.findMany({
-      where,
+      where: where as any,
       orderBy: [
         { isPinned: 'desc' },
-        { position: 'asc' },
         { publishDate: 'desc' },
-      ],
+      ] as any,
     })
     return NextResponse.json(notices)
   } catch (error) {
