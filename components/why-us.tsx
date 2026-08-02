@@ -71,6 +71,9 @@ export default function WhyUs() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
+    const matchMedia = window.matchMedia('(min-width: 1024px)')
+    if (!matchMedia.matches) return
+
     const section = sectionRef.current
     const container = cardsContainerRef.current
     if (!section || !container) return
@@ -81,11 +84,11 @@ export default function WhyUs() {
       cards.forEach((card, idx) => {
         gsap.fromTo(
           card,
-          { y: 40, opacity: 0 },
+          { y: 30, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.6,
+            duration: 0.4,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: card,
@@ -93,7 +96,7 @@ export default function WhyUs() {
               toggleActions: 'play none none none',
               once: true,
             },
-            delay: idx * 0.08,
+            delay: idx * 0.05,
           }
         )
       })
