@@ -1,0 +1,124 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum MediaType {
+  IMAGE
+  DOCUMENT
+}
+
+enum NoticeCategory {
+  NOTICE
+  UPDATE
+  ANNOUNCEMENT
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Program {
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique
+  description    String
+  category       String   @default("School Program")
+  duration       String   @default("3 Months")
+  targetAudience String   @default("Students Grades 6-12")
+  features       String[]
+  imageUrl       String?
+  price          String?  @default("Contact for Pricing")
+  isFeatured     Boolean  @default(false)
+  showOnHome     Boolean  @default(false)
+  isActive       Boolean  @default(true)
+  position       Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Collaboration {
+  id          String   @id @default(cuid())
+  title       String
+  partnerName String
+  partnerLogo String?
+  imageUrl    String?
+  description String
+  websiteUrl  String?
+  type        String?
+  date        String?
+  isFeatured  Boolean  @default(true)
+  isActive    Boolean  @default(true)
+  showOnHome  Boolean  @default(false)
+  position    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Notice {
+  id          String         @id @default(cuid())
+  title       String
+  category    NoticeCategory @default(NOTICE)
+  content     String
+  isPinned    Boolean        @default(false)
+  pdfUrl      String?
+  pdfFileKey  String?
+  imageUrl    String?
+  isActive    Boolean        @default(true)
+  showOnHome  Boolean        @default(false)
+  position    Int            @default(0)
+  publishDate DateTime       @default(now())
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model GalleryItem {
+  id         String    @id @default(cuid())
+  title      String
+  type       MediaType @default(IMAGE)
+  url        String
+  fileKey    String
+  category   String    @default("Events")
+  mimeType   String?
+  size       Int?
+  isActive   Boolean   @default(true)
+  showOnHome Boolean   @default(false)
+  position   Int       @default(0)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model SiteConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  label     String
+  group     String   @default("general")
+  updatedAt DateTime @updatedAt
+}
