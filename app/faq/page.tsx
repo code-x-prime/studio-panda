@@ -1,159 +1,113 @@
-'use client'
-
-import { useState } from 'react'
+import { Metadata } from 'next'
 import Breadcrumb from '@/components/breadcrumb'
 import PageHero from '@/components/page-hero'
 import FAQAccordion from '@/components/faq-accordion'
 import { Input } from '@/components/ui/input'
-import { Search } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'FAQ | Studio Panda',
+  description: 'Frequently asked questions about Studio Panda programs and partnerships.',
+}
 
 const faqCategories = [
   {
-    title: 'Handcrafting & Manufacturing',
+    title: 'General',
     items: [
       {
-        id: 'faq-1',
-        question: '1. Are your perfumes handmade?',
-        answer: 'Yes. Every Rhoseatte perfume is handcrafted in small batches to ensure exceptional quality, freshness, and attention to detail.',
+        id: 'gen-1',
+        question: 'What is Studio Panda?',
+        answer: 'Studio Panda is India\'s premium future-skills platform for schools, transforming education through hands-on creative projects in filmmaking, podcasting, photography, and AI-driven content creation.',
       },
       {
-        id: 'faq-2',
-        question: '2. Where are your perfumes made?',
-        answer: 'All Rhoseatte perfumes are handcrafted at our manufacturing unit in Nagpur, India.',
+        id: 'gen-2',
+        question: 'How long has Studio Panda been operating?',
+        answer: 'We\'ve been partnering with schools since 2020, working with 50+ schools and impacting 5,000+ students across India.',
       },
       {
-        id: 'faq-14',
-        question: '14. Why does my perfume look slightly different from another bottle?',
-        answer: 'Since our perfumes are handcrafted in small batches, slight variations in colour may occur due to natural ingredients. These variations do not affect the quality or performance of the fragrance.',
+        id: 'gen-3',
+        question: 'What makes Studio Panda different?',
+        answer: 'We focus on hands-on, project-based learning with professional facilitators, real equipment, and measurable outcomes. Students build portfolios and gain career-ready skills.',
       },
     ],
   },
   {
-    title: 'Orders, Shipping & Delivery',
+    title: 'Programs',
     items: [
       {
-        id: 'faq-3',
-        question: '3. Can I modify my order after placing it?',
-        answer: 'If your order has not entered production or been dispatched, please contact us immediately. Once production has started, modifications may not be possible.',
+        id: 'prog-1',
+        question: 'How do I choose which program is right for our school?',
+        answer: 'Contact our team for a consultation. We assess your school\'s needs, student interests, and existing resources to recommend the best programs.',
       },
       {
-        id: 'faq-4',
-        question: '4. Can I cancel my order?',
-        answer: 'Orders may only be cancelled before production or dispatch. Customized perfume orders cannot be cancelled once formulation has begun.',
+        id: 'prog-2',
+        question: 'Can we run multiple programs simultaneously?',
+        answer: 'Yes! Many schools run 2-3 programs at once with our dedicated teams. Our Professional and Enterprise plans support this.',
       },
       {
-        id: 'faq-5',
-        question: '5. How long does delivery take?',
-        answer: 'Standard handmade perfumes are typically delivered within 5–20 business days. Customized perfumes require approximately 3–4 weeks.',
+        id: 'prog-3',
+        question: 'How many hours per week are programs?',
+        answer: 'Programs typically meet 3-5 hours per week. We can customize timing to fit your school\'s schedule.',
       },
       {
-        id: 'faq-6',
-        question: '6. Do you ship across India?',
-        answer: 'Yes, we ship to most serviceable locations across India.',
-      },
-      {
-        id: 'faq-7',
-        question: '7. Do you offer international shipping?',
-        answer: 'Currently, we primarily ship within India. International shipping may be introduced in the future.',
-      },
-      {
-        id: 'faq-19',
-        question: '19. What should I do if my order is delayed?',
-        answer: 'While we strive to deliver within the estimated timeline, delays may occur due to courier operations, weather conditions, or other unforeseen circumstances. Please contact us if your order is delayed beyond the estimated delivery period.',
-      },
-      {
-        id: 'faq-20',
-        question: '20. What happens if I enter the wrong shipping address?',
-        answer: 'Please contact us immediately. If your order has not been dispatched, we will try our best to update the address. Once dispatched, changes may not be possible.',
+        id: 'prog-4',
+        question: 'Can we customize the curriculum?',
+        answer: 'Absolutely. We work with schools to tie programs to existing subjects, adjust pacing, and create custom modules.',
       },
     ],
   },
   {
-    title: 'Returns, Exchanges & Restocks',
+    title: 'Logistics',
     items: [
       {
-        id: 'faq-8',
-        question: '8. Can I return my perfume?',
-        answer: 'No. Due to hygiene and safety reasons, all perfume purchases are non-returnable.',
+        id: 'log-1',
+        question: 'Do we need a dedicated studio space?',
+        answer: 'No. We can set up in any classroom, cafeteria, or outdoor space. Our equipment is portable and flexible.',
       },
       {
-        id: 'faq-9',
-        question: '9. Can I exchange my perfume if I don\'t like the fragrance?',
-        answer: 'No. We do not offer exchanges based on personal fragrance preference or change of mind.',
+        id: 'log-2',
+        question: 'What equipment do students get access to?',
+        answer: 'Professional cameras, audio equipment, lighting rigs, editing computers with industry-standard software, and more. It\'s all included.',
       },
       {
-        id: 'faq-21',
-        question: '21. Do you restock sold-out fragrances?',
-        answer: 'Yes, many of our fragrances are restocked periodically. You can subscribe to receive updates when they become available.',
+        id: 'log-3',
+        question: 'How do you handle student safety and privacy?',
+        answer: 'We follow strict protocols: parent consent forms for filming, secure storage of work, privacy training for students, and ethical guidelines for all content.',
+      },
+      {
+        id: 'log-4',
+        question: 'What happens to student work after the program?',
+        answer: 'Students own all their work. They can share it on portfolios, college applications, or keep it private. Some programs showcase work on school channels.',
       },
     ],
   },
   {
-    title: 'Customized & Bespoke Perfumes',
+    title: 'Outcomes & Support',
     items: [
       {
-        id: 'faq-10',
-        question: '10. Do you create customized perfumes?',
-        answer: 'Yes. We offer customized and bespoke perfume services for eligible orders.',
+        id: 'out-1',
+        question: 'How do we measure program success?',
+        answer: 'We track: student confidence gains, work portfolio quality, skill development, engagement levels, and feedback from students, teachers, and parents.',
       },
       {
-        id: 'faq-11',
-        question: '11. How long do customized perfumes take?',
-        answer: 'Customized perfumes generally require 3–4 weeks for formulation and preparation.',
+        id: 'out-2',
+        question: 'Will students get certificates?',
+        answer: 'Yes. Students receive completion certificates and detailed portfolio summaries they can use for college applications and resumes.',
       },
       {
-        id: 'faq-12',
-        question: '12. Can customized perfumes be returned or exchanged?',
-        answer: 'No. Customized perfumes are non-returnable, non-exchangeable, and non-refundable unless they arrive damaged or an incorrect product is delivered.',
-      },
-    ],
-  },
-  {
-    title: 'Usage, Safety & Gifting',
-    items: [
-      {
-        id: 'faq-13',
-        question: '13. How should I store my perfume?',
-        answer: 'Store your perfume in a cool, dry place away from direct sunlight, excessive heat, and humidity. Keep the bottle tightly closed when not in use.',
+        id: 'out-3',
+        question: 'What support do teachers get?',
+        answer: 'We provide full training, ongoing support, curriculum resources, and collaboration on student development throughout the program.',
       },
       {
-        id: 'faq-15',
-        question: '15. Are your perfumes safe for skin?',
-        answer: 'Our perfumes are formulated using cosmetic-grade fragrance ingredients intended for external use. If you have sensitive skin, we recommend performing a patch test before regular use.',
-      },
-      {
-        id: 'faq-16',
-        question: '16. Can I apply perfume to my clothes?',
-        answer: 'Yes, but we recommend testing on an inconspicuous area first, as some fabrics may stain.',
-      },
-      {
-        id: 'faq-17',
-        question: '17. Are your perfumes cruelty-free?',
-        answer: 'We do not test our finished products on animals.',
-      },
-      {
-        id: 'faq-18',
-        question: '18. Do you offer bulk or corporate gifting?',
-        answer: 'Yes. We offer bulk, corporate, wedding, and event gifting solutions. Please contact us for more information.',
+        id: 'out-4',
+        question: 'Can parents get involved?',
+        answer: 'Yes! We offer parent workshops, showcase events, and optional family creative projects to build buy-in and home support.',
       },
     ],
   },
 ]
 
 export default function FAQPage() {
-  const [searchQuery, setSearchQuery] = useState('')
-
-  const filteredCategories = faqCategories
-    .map((category) => {
-      const filteredItems = category.items.filter(
-        (item) =>
-          item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.answer.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-      return { ...category, items: filteredItems }
-    })
-    .filter((category) => category.items.length > 0)
-
   return (
     <main className="min-h-screen bg-background">
       <div className="bg-muted py-4 px-6">
@@ -163,52 +117,37 @@ export default function FAQPage() {
       </div>
 
       <PageHero
-        eyebrow="Got Questions?"
+        eyebrow="Questions?"
         title="Frequently Asked Questions"
-        subtitle="Everything you need to know about our handcrafted perfumes, orders, delivery, and bespoke services."
+        subtitle="Find answers to common questions about Studio Panda programs and partnerships."
       />
 
-      <section className="py-8 px-6 max-w-2xl mx-auto">
-        <div className="relative">
-          <Search className="absolute left-3.5 top-3 h-5 w-5 text-muted-foreground" />
-          <Input
-            type="text"
-            placeholder="Search FAQs (e.g. handmade, return, shipping)..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 py-5 text-base border-primary/20 focus-visible:ring-primary shadow-sm"
-          />
-        </div>
+      <section className="py-12 px-6 max-w-2xl mx-auto">
+        <Input
+          type="text"
+          placeholder="Search FAQs..."
+          className="w-full"
+        />
       </section>
 
-      <section className="py-12 px-6 max-w-4xl mx-auto">
-        {filteredCategories.length > 0 ? (
-          filteredCategories.map((category, idx) => (
-            <div key={idx} className="mb-12">
-              <h2 className="text-2xl font-bold text-foreground mb-6 border-b pb-2">
-                {category.title}
-              </h2>
-              <FAQAccordion items={category.items} />
-            </div>
-          ))
-        ) : (
-          <div className="text-center py-12 border rounded-xl bg-muted/30">
-            <p className="text-lg text-muted-foreground">
-              No matching questions found for &quot;{searchQuery}&quot;.
-            </p>
+      <section className="py-16 px-6 max-w-4xl mx-auto">
+        {faqCategories.map((category, idx) => (
+          <div key={idx} className="mb-12">
+            <h2 className="text-2xl font-bold text-foreground mb-6">{category.title}</h2>
+            <FAQAccordion items={category.items} />
           </div>
-        )}
+        ))}
       </section>
 
       <section className="py-16 px-6 max-w-4xl mx-auto mb-16">
         <div className="text-center p-12 rounded-2xl border bg-muted/50">
           <h2 className="text-3xl font-bold text-foreground mb-4">Still have questions?</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Feel free to reach out to us for assistance regarding orders, custom formulations, or corporate gifting.
+            We&apos;d love to chat about how Studio Panda can transform your school
           </p>
           <a href="/contact" className="inline-block">
-            <button className="px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-full transition-all hover:opacity-90 shadow-md">
-              Contact Support
+            <button className="px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-full transition-all hover:opacity-90">
+              Schedule a Call
             </button>
           </a>
         </div>
@@ -216,4 +155,5 @@ export default function FAQPage() {
     </main>
   )
 }
+
 
